@@ -21,10 +21,15 @@
 		 const cartItems = [];
 		 $(function(){$( ".right-side" ).droppable({
     	  drop: function( event, ui ) {
-
-			console.log(ui);
-			console.log("hello");
-         
+		
+			id = ui.attr('id');
+			let cartItem=$(".cart-item.hidden")
+			.clone().appendTo('.right-side')
+			.removeClass("hidden")
+			items[id].total+=items[id].price
+			cartItem.children("#name").html(items[id].title)
+			cartItem.children("#price").html(items[id].price)
+			cartItem.children("#total").html(items[id].total)
       }
     });
 		 });
@@ -39,7 +44,8 @@
 					 newItem.draggable({ revert: true, helper: "clone" })
 					 newItem.children('img').attr('src',item.image)
 					 newItem.attr('id',counter)
-					 counter++;
+					 updateCart();
+					 
 				 }
 
 
